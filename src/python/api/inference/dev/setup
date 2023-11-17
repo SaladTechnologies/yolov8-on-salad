@@ -1,0 +1,24 @@
+#! /bin/bash
+
+set -e
+
+echo "setup the curent environment"
+CURRENT_DIRECTORY="$( dirname "${BASH_SOURCE[0]}" )"
+cd "${CURRENT_DIRECTORY}"
+echo "current directory: $( pwd )"
+echo "setup development environment for inference"
+YOLOv8_SRC_API_DIR="$( cd .. && pwd )"
+echo "dev directory set to: ${YOLOv8_SRC_API_DIR}"
+echo "remove old virtual environment"
+rm -rf "${YOLOv8_SRC_API_DIR}/.venv"
+echo "create new virtual environment"
+python3.9 -m venv "${YOLOv8_SRC_API_DIR}/.venv"
+echo "activate virtual environment"
+source "${YOLOv8_SRC_API_DIR}/.venv/bin/activate"
+echo "installing dependencies ..."
+
+(cd "${YOLOv8_SRC_API_DIR}" && python -m pip install pip==21.1.1)
+(cd "${YOLOv8_SRC_API_DIR}" && pip install numpy)
+(cd "${YOLOv8_SRC_API_DIR}" && pip install --upgrade --force-reinstall "git+https://github.com/ytdl-org/youtube-dl.git")
+(cd "${YOLOv8_SRC_API_DIR}" && pip install lap==0.4.0)
+(cd "${YOLOv8_SRC_API_DIR}" && pip install --upgrade pip && pip install -r requirements.txt)
