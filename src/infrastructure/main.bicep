@@ -137,7 +137,7 @@ resource RequestsSubscription 'Microsoft.EventGrid/systemTopics/eventSubscriptio
       ]
       isSubjectCaseSensitive: false
       subjectBeginsWith: '/blobServices/default/containers/${inputContainerName}'
-      subjectEndsWith: 'txt'
+      subjectEndsWith: 'json'
     }
     retryPolicy: {
       eventTimeToLiveInMinutes: 1440
